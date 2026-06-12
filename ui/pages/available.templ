@@ -1,0 +1,53 @@
+package pages
+
+import "github.com/raffy-io/bookings/ui/components"
+import "github.com/raffy-io/bookings/internal/models"
+import "fmt"
+import "github.com/raffy-io/bookings/internal/forms"
+
+templ AvailableRooms(notif *models.NotifType, data *forms.AvailableForm, csrfToken string) {
+	<section class="pt-5 col-lg-6 mx-auto">
+		<div class="container pt-5">
+			<h2 class="mb-2">Check Availability</h2>
+			<form action="/search-availability" method="POST" x-data={ fmt.Sprintf("{ arrival: '%s', departure: '%s', today: new Date().toISOString().split('T')[0] }", data.Arrival, data.Departure) }>
+				<input type="hidden" name="csrf_token" value={ csrfToken }/>
+				<div class="row g-2">
+					<!-- Arrival Field -->
+					<div class="col-md">
+						<div class="form-floating">
+							<input
+								type="date"
+								id="startDateInput"
+								name="start_date"
+								class="form-control"
+								x-model="arrival"
+								:min="today"
+							/>
+							<label for="startDateInput">Arrival Date</label>
+						</div>
+					</div>
+					<!-- Departure Field -->
+					<div class="col-md">
+						<div class="form-floating">
+							<input
+								type="date"
+								id="endDateInput"
+								name="end_date"
+								class="form-control"
+								x-model="departure"
+								:min="arrival || today"
+							/>
+							<label for="endDateInput">Departure Date</label>
+						</div>
+					</div>
+				</div>
+				<hr/>
+				<button type="submit" class="btn btn-primary w-100 py-2">Check</button>
+			</form>
+		</div>
+		// toast alert receiving data.SuccessMessage and data.ErrorMessage
+		if notif != nil {
+			@components.ToastAlert(notif.SuccessMessage, notif.ErrorMessage)
+		}
+	</section>
+}
