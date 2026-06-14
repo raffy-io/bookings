@@ -20,6 +20,7 @@ templ AvailableRooms(notif *models.NotifType, data *forms.AvailableForm, csrfTok
 							placeholder="Arrival"
 							class="form-control"
 							value={ data.Arrival }
+							autocomplete="off"
 						/>
 						<input
 							type="text"
@@ -27,6 +28,7 @@ templ AvailableRooms(notif *models.NotifType, data *forms.AvailableForm, csrfTok
 							placeholder="Departure"
 							class="form-control"
 							value={ data.Departure }
+							autocomplete="off"
 						/>
 					</div>
 					<hr/>

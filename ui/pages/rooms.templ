@@ -1,23 +1,64 @@
 package pages
 
-templ GeneralsQuarters() {
+templ GeneralsQuarters(csrfToken string) {
 	<section class="pt-5">
-		<div class="container py-5">
+		<div class="container py-5" x-data="{ open: false }">
 			<img class="img-fluid img-thumbnail mb-5" src="/static/images/generals-quarters.png" alt="generals quarters"/>
 			<h2>General's Quarters</h2>
 			<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eveniet iste numquam, molestias explicabo repellendus cum quasi dolores modi mollitia delectus, possimus, eos ratione vero nisi minima ipsum similique. Animi, perspiciatis?Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iusto facere, nesciunt voluptatum eaque debitis non perferendis pariatur, cupiditate commodi mollitia saepe tenetur voluptates totam natus voluptate quod libero, illo doloribus.</p>
-			<a href="/search-availability" class="btn btn-primary">Check Availability</a>
+			<button class="btn btn-primary" @click="open = ! open">Check Availability</button>
+			<div x-show="open" x-cloak class="custom-blur p-5 position-fixed top-0 start-0 end-0 vh-100 vw-100" x-transition.duration.300ms>
+				<div class="col-12 col-lg-6 d-flex justify-content-center align-items-center w-100 h-100" @click.self="open = false">
+					@AvailabilityModal(csrfToken)
+				</div>
+			</div>
 		</div>
 	</section>
 }
 
-templ MajorsSuite() {
+templ MajorsSuite(csrfToken string) {
 	<section class="pt-5">
-		<div class="container py-5">
+		<div class="container py-5" x-data="{ open: false }">
 			<img class="img-fluid img-thumbnail mb-5" src="/static/images/majors-suite.png" alt="majors suite"/>
 			<h2>Major's Suite</h2>
 			<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eveniet iste numquam, molestias explicabo repellendus cum quasi dolores modi mollitia delectus, possimus, eos ratione vero nisi minima ipsum similique. Animi, perspiciatis?Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iusto facere, nesciunt voluptatum eaque debitis non perferendis pariatur, cupiditate commodi mollitia saepe tenetur voluptates totam natus voluptate quod libero, illo doloribus.</p>
-			<a href="/search-availability" class="btn btn-primary">Check Availability</a>
+			<button class="btn btn-primary" @click="open = ! open">Check Availability</button>
+			<div x-show="open" x-cloak class="custom-blur p-5 position-fixed top-0 start-0 end-0 vh-100 vw-100" x-transition.duration.300ms>
+				<div class="col-12 col-lg-6 d-flex justify-content-center align-items-center w-100 h-100" @click.self="open = false">
+					@AvailabilityModal(csrfToken)
+				</div>
+			</div>
 		</div>
 	</section>
+}
+
+templ AvailabilityModal(csrfToken string) {
+	<div x-data="ajaxModal" class="p-5 bg-light shadow-lg rounded">
+		<form
+			x-ref="availabilityAjaxForm"
+			@submit.prevent="availabilitySearch"
+			x-data="datePickerComponent"
+		>
+			<input type="hidden" name="csrf_token" value={ csrfToken }/>
+			<div class="d-flex align-items-center gap-2" x-ref="pickerElement">
+				<input
+					type="text"
+					name="start_date"
+					placeholder="Arrival"
+					class="form-control"
+					autocomplete="off"
+				/>
+				<input
+					type="text"
+					name="end_date"
+					placeholder="Departure"
+					class="form-control"
+					autocomplete="off"
+				/>
+			</div>
+			<hr/>
+			<button type="submit" class="btn btn-primary mt-3">Search</button>
+			<button type="button" class="btn btn-secondary mt-3" @click="open = false">Close</button>
+		</form>
+	</div>
 }

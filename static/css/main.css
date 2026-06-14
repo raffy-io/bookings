@@ -9,7 +9,16 @@ h2 {
   font-weight: 900 !important;
 }
 
+[x-cloak] {
+  display: none !important;
+}
+
 .notie-container {
   box-shadow: none;
   z-index: 20000 !important;
+}
+
+.custom-blur {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); /* Safari support */
 }

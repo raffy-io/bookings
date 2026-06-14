@@ -1,7 +1,9 @@
 package handlers
 
 import (
+	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 	"strings"
 
@@ -45,14 +47,16 @@ func (h *Handlers) About(w http.ResponseWriter, r *http.Request) {
 
 // Generals renders generals quarter page
 func (h *Handlers) Generals(w http.ResponseWriter, r *http.Request) {
-	component := pages.GeneralsQuarters()
+	token := nosurf.Token(r)
+	component := pages.GeneralsQuarters(token)
 	layout := layout.Base("General's Quarters", component)
 	templ.Handler(layout).ServeHTTP(w, r)
 }
 
 // Majors renders majors suite page
 func (h *Handlers) Majors(w http.ResponseWriter, r *http.Request) {
-	component := pages.MajorsSuite()
+	token := nosurf.Token(r)
+	component := pages.MajorsSuite(token)
 	layout := layout.Base("Major's Suite", component)
 	templ.Handler(layout).ServeHTTP(w, r)
 }
@@ -106,6 +110,28 @@ func (h *Handlers) PostAvailability(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("Success! form submitted!")
 
 }
+
+type jsonResponse struct{
+	OK 		bool   `json:"ok"`
+	Message string `json:"message"`
+}
+// AvailabilityJSON handles request for availability and sed JSON response
+func (h *Handlers) AvailabilityJSON(w http.ResponseWriter, r *http.Request) {
+	resp := &jsonResponse{
+		OK: true,
+		Message: "Available!",
+	}
+
+	out, err := json.MarshalIndent(resp,"","     ")
+	if err != nil {
+		log.Println(err)
+	}
+
+	log.Println(string(out))
+	w.Header().Set("Content-Type","application/json")
+	w.Write(out)
+}
+
 
 // Reservation renders make reservation page
 func (h *Handlers) Reservation(w http.ResponseWriter, r *http.Request) {
@@ -183,7 +209,7 @@ func (h *Handlers) ReserveSummary(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(w,r,"/",http.StatusTemporaryRedirect)
 		return
 	}
-
+	h.Session.Remove(r.Context(),"reservation")
 	component := pages.ReservationSummary(notif, &reservation)
 	layout := layout.Base("Reservation Summary", component)
 	templ.Handler(layout).ServeHTTP(w, r)

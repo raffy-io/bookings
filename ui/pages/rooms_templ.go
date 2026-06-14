@@ -8,7 +8,7 @@ package pages
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
-func GeneralsQuarters() templ.Component {
+func GeneralsQuarters(csrfToken string) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -29,7 +29,15 @@ func GeneralsQuarters() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<section class=\"pt-5\"><div class=\"container py-5\"><img class=\"img-fluid img-thumbnail mb-5\" src=\"/static/images/generals-quarters.png\" alt=\"generals quarters\"><h2>General's Quarters</h2><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eveniet iste numquam, molestias explicabo repellendus cum quasi dolores modi mollitia delectus, possimus, eos ratione vero nisi minima ipsum similique. Animi, perspiciatis?Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iusto facere, nesciunt voluptatum eaque debitis non perferendis pariatur, cupiditate commodi mollitia saepe tenetur voluptates totam natus voluptate quod libero, illo doloribus.</p><a href=\"/search-availability\" class=\"btn btn-primary\">Check Availability</a></div></section>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<section class=\"pt-5\"><div class=\"container py-5\" x-data=\"{ open: false }\"><img class=\"img-fluid img-thumbnail mb-5\" src=\"/static/images/generals-quarters.png\" alt=\"generals quarters\"><h2>General's Quarters</h2><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eveniet iste numquam, molestias explicabo repellendus cum quasi dolores modi mollitia delectus, possimus, eos ratione vero nisi minima ipsum similique. Animi, perspiciatis?Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iusto facere, nesciunt voluptatum eaque debitis non perferendis pariatur, cupiditate commodi mollitia saepe tenetur voluptates totam natus voluptate quod libero, illo doloribus.</p><button class=\"btn btn-primary\" @click=\"open = ! open\">Check Availability</button><div x-show=\"open\" x-cloak class=\"custom-blur p-5 position-fixed top-0 start-0 end-0 vh-100 vw-100\" x-transition.duration.300ms><div class=\"col-12 col-lg-6 d-flex justify-content-center align-items-center w-100 h-100\" @click.self=\"open = false\">")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = AvailabilityModal(csrfToken).Render(ctx, templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "</div></div></div></section>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -37,7 +45,7 @@ func GeneralsQuarters() templ.Component {
 	})
 }
 
-func MajorsSuite() templ.Component {
+func MajorsSuite(csrfToken string) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -58,7 +66,57 @@ func MajorsSuite() templ.Component {
 			templ_7745c5c3_Var2 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "<section class=\"pt-5\"><div class=\"container py-5\"><img class=\"img-fluid img-thumbnail mb-5\" src=\"/static/images/majors-suite.png\" alt=\"majors suite\"><h2>Major's Suite</h2><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eveniet iste numquam, molestias explicabo repellendus cum quasi dolores modi mollitia delectus, possimus, eos ratione vero nisi minima ipsum similique. Animi, perspiciatis?Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iusto facere, nesciunt voluptatum eaque debitis non perferendis pariatur, cupiditate commodi mollitia saepe tenetur voluptates totam natus voluptate quod libero, illo doloribus.</p><a href=\"/search-availability\" class=\"btn btn-primary\">Check Availability</a></div></section>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "<section class=\"pt-5\"><div class=\"container py-5\" x-data=\"{ open: false }\"><img class=\"img-fluid img-thumbnail mb-5\" src=\"/static/images/majors-suite.png\" alt=\"majors suite\"><h2>Major's Suite</h2><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eveniet iste numquam, molestias explicabo repellendus cum quasi dolores modi mollitia delectus, possimus, eos ratione vero nisi minima ipsum similique. Animi, perspiciatis?Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iusto facere, nesciunt voluptatum eaque debitis non perferendis pariatur, cupiditate commodi mollitia saepe tenetur voluptates totam natus voluptate quod libero, illo doloribus.</p><button class=\"btn btn-primary\" @click=\"open = ! open\">Check Availability</button><div x-show=\"open\" x-cloak class=\"custom-blur p-5 position-fixed top-0 start-0 end-0 vh-100 vw-100\" x-transition.duration.300ms><div class=\"col-12 col-lg-6 d-flex justify-content-center align-items-center w-100 h-100\" @click.self=\"open = false\">")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = AvailabilityModal(csrfToken).Render(ctx, templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "</div></div></div></section>")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		return nil
+	})
+}
+
+func AvailabilityModal(csrfToken string) templ.Component {
+	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
+		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
+		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
+			return templ_7745c5c3_CtxErr
+		}
+		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
+		if !templ_7745c5c3_IsBuffer {
+			defer func() {
+				templ_7745c5c3_BufErr := templruntime.ReleaseBuffer(templ_7745c5c3_Buffer)
+				if templ_7745c5c3_Err == nil {
+					templ_7745c5c3_Err = templ_7745c5c3_BufErr
+				}
+			}()
+		}
+		ctx = templ.InitializeContext(ctx)
+		templ_7745c5c3_Var3 := templ.GetChildren(ctx)
+		if templ_7745c5c3_Var3 == nil {
+			templ_7745c5c3_Var3 = templ.NopComponent
+		}
+		ctx = templ.ClearChildren(ctx)
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "<div x-data=\"ajaxModal\" class=\"p-5 bg-light shadow-lg rounded\"><form x-ref=\"availabilityAjaxForm\" @submit.prevent=\"availabilitySearch\" x-data=\"datePickerComponent\"><input type=\"hidden\" name=\"csrf_token\" value=\"")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var4 string
+		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.ResolveAttributeValue(csrfToken)
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/pages/rooms.templ`, Line: 42, Col: 59}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var4)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "\"><div class=\"d-flex align-items-center gap-2\" x-ref=\"pickerElement\"><input type=\"text\" name=\"start_date\" placeholder=\"Arrival\" class=\"form-control\" autocomplete=\"off\"> <input type=\"text\" name=\"end_date\" placeholder=\"Departure\" class=\"form-control\" autocomplete=\"off\"></div><hr><button type=\"submit\" class=\"btn btn-primary mt-3\">Search</button> <button type=\"button\" class=\"btn btn-secondary mt-3\" @click=\"open = false\">Close</button></form></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
