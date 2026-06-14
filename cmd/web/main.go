@@ -1,12 +1,14 @@
 package main
 
 import (
+	"encoding/gob"
 	"fmt"
 	"net/http"
 	"time"
 
 	"github.com/alexedwards/scs/v2"
 	"github.com/raffy-io/bookings/internal/handlers"
+	"github.com/raffy-io/bookings/internal/models"
 )
 
 type AppConfig struct {
@@ -16,6 +18,7 @@ type AppConfig struct {
 }
 
 func main() {
+	gob.Register(models.ReservationSummary{})
 	sessionManager := scs.New()
 	sessionManager.Lifetime = 24 * time.Hour
 

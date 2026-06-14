@@ -25,6 +25,7 @@ func (app *AppConfig) routes() http.Handler {
 	mux.Get("/make-reservation",app.Handlers.Reservation)
 	mux.Post("/make-reservation",app.Handlers.PostReservation)
 	mux.Get("/contacts",app.Handlers.Contacts)
+	mux.Get("/reservation-summary",app.Handlers.ReserveSummary)
 
 	// static assets
 	staticFS, err := fs.Sub(bookings.EmbeddedAssets, "static")

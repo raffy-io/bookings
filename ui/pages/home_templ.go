@@ -8,7 +8,9 @@ package pages
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
-func Home() templ.Component {
+import "github.com/raffy-io/bookings/internal/models"
+
+func Home(notif *models.NotifType) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -29,7 +31,30 @@ func Home() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<section class=\"pt-5 d-flex flex-column\" x-data=\"{shown:false}\" x-intersect=\"shown = true\"><div class=\"container-fluid px-0\" x-show=\"shown\" x-transition.opacity.duration.1000ms><div id=\"hero-slider\" class=\"carousel slide carousel-fade\" data-bs-ride=\"carousel\"><div class=\"carousel-indicators\"><button type=\"button\" data-bs-target=\"#hero-slider\" data-bs-slide-to=\"0\" class=\"active\" aria-current=\"true\" aria-label=\"Slide 1\"></button> <button type=\"button\" data-bs-target=\"#hero-slider\" data-bs-slide-to=\"1\" aria-label=\"Slide 2\"></button> <button type=\"button\" data-bs-target=\"#hero-slider\" data-bs-slide-to=\"2\" aria-label=\"Slide 3\"></button></div><div class=\"carousel-inner\"><div class=\"carousel-item active\" data-bs-interval=\"3000\"><div class=\"card-img-overlay bg-dark bg-opacity-50\"></div><img src=\"/static/images/woman-laptop.png\" class=\"d-block w-100\" alt=\"woman with laptop\"><div class=\"carousel-caption d-none d-md-block\"><h5>First slide label</h5><p>Some representative placeholder content for the first slide.</p></div></div><div class=\"carousel-item\" data-bs-interval=\"3000\"><div class=\"card-img-overlay bg-dark bg-opacity-50\"></div><img src=\"/static/images/tray.png\" class=\"d-block w-100\" alt=\"tray with coffee\"><div class=\"carousel-caption d-none d-md-block\"><h5>Second slide label</h5><p>Some representative placeholder content for the second slide.</p></div></div><div class=\"carousel-item\" data-bs-interval=\"3000\"><div class=\"card-img-overlay bg-dark bg-opacity-50\"></div><img src=\"/static/images/outside.png\" class=\"d-block w-100\" alt=\"outside\"><div class=\"carousel-caption d-none d-md-block\"><h5>Third slide label</h5><p>Some representative placeholder content for the third slide.</p></div></div></div></div></div><div class=\"container py-5 text-center\" x-show=\"shown\" x-transition.duration.1000ms><h1 class=\"mb-3\">Welcome To Fort John Smith Bed and Breakfast</h1><p class=\"mb-4\">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Natus reiciendis voluptatum, itaque dolorum neque provident commodi modi beatae quisquam labore et quam praesentium pariatur esse error minus, nemo, eius nihil. Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut qui quae eius alias soluta sint mollitia eligendi vero officiis, ratione deleniti? Quam, doloribus natus dolores ea odio ut expedita tenetur! Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad illum qui perferendis amet excepturi quis ipsa placeat omnis modi neque! Voluptate nihil consectetur laboriosam reiciendis </p><a href=\"/search-availability\" class=\"btn btn-primary\">Make Reservation</a></div></section>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<section class=\"pt-5 d-flex flex-column\" x-data=\"{shown:false}\" x-intersect=\"shown = true\"><div class=\"container-fluid px-0\" x-show=\"shown\" x-transition.opacity.duration.1000ms><div id=\"hero-slider\" class=\"carousel slide carousel-fade\" data-bs-ride=\"carousel\"><div class=\"carousel-indicators\"><button type=\"button\" data-bs-target=\"#hero-slider\" data-bs-slide-to=\"0\" class=\"active\" aria-current=\"true\" aria-label=\"Slide 1\"></button> <button type=\"button\" data-bs-target=\"#hero-slider\" data-bs-slide-to=\"1\" aria-label=\"Slide 2\"></button> <button type=\"button\" data-bs-target=\"#hero-slider\" data-bs-slide-to=\"2\" aria-label=\"Slide 3\"></button></div><div class=\"carousel-inner\"><div class=\"carousel-item active\" data-bs-interval=\"3000\"><div class=\"card-img-overlay bg-dark bg-opacity-50\"></div><img src=\"/static/images/woman-laptop.png\" class=\"d-block w-100\" alt=\"woman with laptop\"><div class=\"carousel-caption d-none d-md-block\"><h5>First slide label</h5><p>Some representative placeholder content for the first slide.</p></div></div><div class=\"carousel-item\" data-bs-interval=\"3000\"><div class=\"card-img-overlay bg-dark bg-opacity-50\"></div><img src=\"/static/images/tray.png\" class=\"d-block w-100\" alt=\"tray with coffee\"><div class=\"carousel-caption d-none d-md-block\"><h5>Second slide label</h5><p>Some representative placeholder content for the second slide.</p></div></div><div class=\"carousel-item\" data-bs-interval=\"3000\"><div class=\"card-img-overlay bg-dark bg-opacity-50\"></div><img src=\"/static/images/outside.png\" class=\"d-block w-100\" alt=\"outside\"><div class=\"carousel-caption d-none d-md-block\"><h5>Third slide label</h5><p>Some representative placeholder content for the third slide.</p></div></div></div></div></div><div class=\"container py-5 text-center\" x-show=\"shown\" x-transition.duration.1000ms><h1 class=\"mb-3\">Welcome To Fort John Smith Bed and Breakfast</h1><p class=\"mb-4\">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Natus reiciendis voluptatum, itaque dolorum neque provident commodi modi beatae quisquam labore et quam praesentium pariatur esse error minus, nemo, eius nihil. Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut qui quae eius alias soluta sint mollitia eligendi vero officiis, ratione deleniti? Quam, doloribus natus dolores ea odio ut expedita tenetur! Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad illum qui perferendis amet excepturi quis ipsa placeat omnis modi neque! Voluptate nihil consectetur laboriosam reiciendis </p><a href=\"/search-availability\" class=\"btn btn-primary\">Make Reservation</a></div>")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		if notif != nil && notif.ErrorMessage != "" {
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "<div x-data=\"notie\" data-type=\"error\" data-msg=\"")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			var templ_7745c5c3_Var2 string
+			templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.ResolveAttributeValue(notif.ErrorMessage)
+			if templ_7745c5c3_Err != nil {
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/pages/home.templ`, Line: 55, Col: 33}
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var2)
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "\"></div>")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "</section>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

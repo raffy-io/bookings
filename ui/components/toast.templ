@@ -1,14 +1,18 @@
 package components
 
-import "fmt"
-
-// ToastAlert handles rendering SweetAlert2 toasts based on server messages.
-// It will render nothing if both messages are empty.
 templ ToastAlert(successMessage, errorMessage string) {
 	if successMessage != "" {
-		<div x-data={ fmt.Sprintf("notification('%s', 'success')", successMessage) }></div>
+		<div
+			x-data="notification"
+			data-icon="success"
+			data-msg={ successMessage }
+		></div>
 	}
 	if errorMessage != "" {
-		<div x-data={ fmt.Sprintf("notification('%s', 'error')", errorMessage) }></div>
+		<div
+			x-data="notification"
+			data-icon="error"
+			data-msg={ errorMessage }
+		></div>
 	}
 }

@@ -1,0 +1,40 @@
+package pages
+
+import "github.com/raffy-io/bookings/ui/components"
+import "github.com/raffy-io/bookings/internal/models"
+
+templ ReservationSummary(notif *models.NotifType, data *models.ReservationSummary) {
+	<section class="pt-5 col-lg-6 mx-auto">
+		<div class="container pt-5">
+			<h2 class="mb-2">Reservation Summary</h2>
+			<table class="table table-striped">
+				<thead></thead>
+				<tbody>
+					<tr>
+						<td>Name: </td>
+						<td>{ data.Name } </td>
+					</tr>
+					<tr>
+						<td>Arrival: </td>
+						<td>{ data.Arrival } </td>
+					</tr>
+					<tr>
+						<td>Departure: </td>
+						<td>{ data.Departure } </td>
+					</tr>
+					<tr>
+						<td>Email: </td>
+						<td>{ data.Email } </td>
+					</tr>
+					<tr>
+						<td>Phone: </td>
+						<td>{ data.Phone } </td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		if notif != nil {
+			@components.ToastAlert(notif.SuccessMessage, notif.ErrorMessage)
+		}
+	</section>
+}

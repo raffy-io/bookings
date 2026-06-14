@@ -8,10 +8,11 @@ package pages
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
-import "github.com/raffy-io/bookings/ui/components"
-import "github.com/raffy-io/bookings/internal/models"
-import "fmt"
-import "github.com/raffy-io/bookings/internal/forms"
+import (
+	"github.com/raffy-io/bookings/internal/forms"
+	"github.com/raffy-io/bookings/internal/models"
+	"github.com/raffy-io/bookings/ui/components"
+)
 
 func AvailableRooms(notif *models.NotifType, data *forms.AvailableForm, csrfToken string) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
@@ -34,33 +35,46 @@ func AvailableRooms(notif *models.NotifType, data *forms.AvailableForm, csrfToke
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<section class=\"pt-5 col-lg-6 mx-auto\"><div class=\"container pt-5\"><h2 class=\"mb-2\">Check Availability</h2><form action=\"/search-availability\" method=\"POST\" x-data=\"")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<section class=\"pt-5 col-lg-6 mx-auto\"><div class=\"container pt-5\"><h2 class=\"mb-2\">Check Availability</h2><div x-data=\"datePickerComponent\"><form action=\"/search-availability\" method=\"POST\"><input type=\"hidden\" name=\"csrf_token\" value=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var2 string
-		templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.ResolveAttributeValue(fmt.Sprintf("{ arrival: '%s', departure: '%s', today: new Date().toISOString().split('T')[0] }", data.Arrival, data.Departure))
+		templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.ResolveAttributeValue(csrfToken)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/pages/available.templ`, Line: 12, Col: 188}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/pages/available.templ`, Line: 15, Col: 61}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var2)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "\"><input type=\"hidden\" name=\"csrf_token\" value=\"")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "\"><div class=\"d-flex align-items-center gap-2\" x-ref=\"pickerElement\"><input type=\"text\" name=\"start_date\" placeholder=\"Arrival\" class=\"form-control\" value=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var3 string
-		templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.ResolveAttributeValue(csrfToken)
+		templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.ResolveAttributeValue(data.Arrival)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/pages/available.templ`, Line: 13, Col: 60}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/pages/available.templ`, Line: 22, Col: 27}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var3)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "\"><div class=\"row g-2\"><!-- Arrival Field --><div class=\"col-md\"><div class=\"form-floating\"><input type=\"date\" id=\"startDateInput\" name=\"start_date\" class=\"form-control\" x-model=\"arrival\" :min=\"today\"> <label for=\"startDateInput\">Arrival Date</label></div></div><!-- Departure Field --><div class=\"col-md\"><div class=\"form-floating\"><input type=\"date\" id=\"endDateInput\" name=\"end_date\" class=\"form-control\" x-model=\"departure\" :min=\"arrival || today\"> <label for=\"endDateInput\">Departure Date</label></div></div></div><hr><button type=\"submit\" class=\"btn btn-primary w-100 py-2\">Check</button></form></div>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "\"> <input type=\"text\" name=\"end_date\" placeholder=\"Departure\" class=\"form-control\" value=\"")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var4 string
+		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.ResolveAttributeValue(data.Departure)
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/pages/available.templ`, Line: 29, Col: 29}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var4)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "\"></div><hr><button type=\"submit\" class=\"btn btn-primary mt-3\">Search</button></form></div></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -70,7 +84,7 @@ func AvailableRooms(notif *models.NotifType, data *forms.AvailableForm, csrfToke
 				return templ_7745c5c3_Err
 			}
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "</section>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "</section>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

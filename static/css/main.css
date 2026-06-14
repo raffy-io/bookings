@@ -8,3 +8,8 @@ h1,
 h2 {
   font-weight: 900 !important;
 }
+
+.notie-container {
+  box-shadow: none;
+  z-index: 20000 !important;
+}

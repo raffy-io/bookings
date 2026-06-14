@@ -7,3 +7,11 @@ type NotifType struct {
 	ErrorMessage   string
 	ErrorsMap  forms.FormErrors
 }
+
+type ReservationSummary struct {
+	Name string
+	Arrival string
+	Departure string
+	Email string
+	Phone string
+}
