@@ -1,0 +1,75 @@
+.btn {
+  display: inline-block;
+  color: inherit;
+  transition: all 0.3s;
+  border: none;
+  background: none;
+  overflow: hidden; /* Fixes edge clipping artifacts */
+  vertical-align: middle; /* Keeps inline alignment stable during transforms */
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-full {
+  &:link,
+  &:visited {
+    background: linear-gradient(
+      120deg,
+      var(--brand-30) 0%,
+      var(--brand-30) 50%,
+      var(--brand-10) 50%
+    );
+    background-size: 220%;
+    color: var(--brand-60);
+    will-change: transform, background-position; /* Prepares the GPU */
+  }
+
+  &:hover {
+    transform: translateY(-4px);
+    background-position: 100%;
+    box-shadow: var(--shadow-dark);
+    color: var(--brand-30);
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: var(--shadow-light);
+  }
+}
+
+.btn-nav {
+  color: var(--brand-60);
+  background: none;
+  font-size: var(--xl);
+  height: 4rem;
+  width: 4rem;
+  transition: var(--transition);
+
+  &:hover {
+    scale: 1.2;
+  }
+}
+
+.btn-form {
+  background: linear-gradient(
+    120deg,
+    var(--brand-30) 0%,
+    var(--brand-30) 50%,
+    var(--brand-10) 50%
+  );
+  background-size: 220%;
+  color: var(--brand-60);
+  will-change: transform, background-position; /* Prepares the GPU */
+
+  &:hover {
+    transform: translateY(-4px);
+    background-position: 100%;
+    box-shadow: var(--shadow-dark);
+    color: var(--brand-30);
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: var(--shadow-light);
+  }
+}

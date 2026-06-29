@@ -1,0 +1,33 @@
+package pages
+
+import "github.com/raffy-io/bookings/internal/models"
+
+templ Homepage(notif *models.NotifType) {
+	<section class="homepage" x-data="{ shown: false }" x-intersect="shown = true">
+		<div class="homepage__hero" x-cloak x-show="shown" x-transition.opacity.duration.1000ms>
+			<div class="dark-overlay z-2"></div>
+			<img class="img-fluid z-1" src="/static/images/hero.jpg" alt="view on terrace"/>
+			<div class="homepage__hero-text z-3">
+				<p>Find your next peaceful retreat.</p>
+			</div>
+		</div>
+		<div class="homepage__cta container" x-cloak x-show="shown" x-transition.opacity.duration.2000ms>
+			<h1 class="mb-sm capitalize">welcome to fort worth bed and breakfast</h1>
+			<p class="mb-lg">
+				<strong>Your Home Away from Home, Effortlessly Booked.</strong>
+				Discover unique bed and breakfasts that offer more than just a place to sleep. From homemade morning meals to hosts who treat you like family, we connect you with charming, local stays that make every journey feel personal. Find your next peaceful retreat and experience true hospitality today.
+			</p>
+			<a href="/about" class=" btn btn-full px-lg py-xs">
+				<p class="capitalize">get started</p>
+			</a>
+		</div>
+		// error toast if redirected from empty reservation summary
+		if notif != nil && notif.ErrorMessage != "" {
+			<div
+				x-data="notie"
+				data-type="error"
+				data-msg={ notif.ErrorMessage }
+			></div>
+		}
+	</section>
+}

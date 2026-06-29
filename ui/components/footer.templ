@@ -1,0 +1,12 @@
+package components
+
+import (
+	"strconv"
+	"time"
+)
+
+templ Footer() {
+	<div class="footer flex justify-center items-center py-sm">
+		<p>Powered by GO <span>{ strconv.Itoa(time.Now().Year()) }</span></p>
+	</div>
+}

@@ -1,0 +1,15 @@
+package pages
+
+templ Contacts() {
+	<section class="about py-8xl" x-data="{ shown: false }" x-intersect="shown = true">
+		<div class="container" x-cloak x-show="shown" x-transition.opacity.duration.2000ms>
+			<img class="img-fluid mb-xl" src="/static/images/contacts.jpg" alt="woman in living room"/>
+			<h2 class="capitalize mb-xs">contact us</h2>
+			<p class="mb-lg">
+				Lorem ipsum dolor, sit amet consectetur adipisicing elit. Obcaecati eum, sit quis id reiciendis omnis voluptatem pariatur et? Autem ducimus possimus iusto exercitationem perferendis, fugiat illum laborum minus consequuntur officia.Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quae perferendis inventore in id culpa consequuntur quia, qui vero ipsam non quod accusantium, corrupti pariatur at blanditiis iste minus et sit.
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos repudiandae, sequi ullam quia exercitationem modi fugit repellat eos quo, saepe doloremque ad. Non pariatur perferendis aperiam. Perferendis rerum hic explicabo.
+			</p>
+			<a href="/availability" class="btn btn-full py-xs px-lg"><p class="capitalize">check rooms</p></a>
+		</div>
+	</section>
+}

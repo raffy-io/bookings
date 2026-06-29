@@ -1,0 +1,37 @@
+@use "../abstracts/mixins" as *;
+
+.homepage {
+  &__hero {
+    position: relative;
+    height: 60dvh;
+
+    @include respond(md) {
+      height: 80dvh;
+    }
+
+    &-text {
+      text-align: center;
+      color: var(--brand-60);
+      position: absolute;
+      bottom: 2%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  &__cta {
+    text-align: left;
+
+    @include respond(md) {
+      text-align: center;
+    }
+    h1 {
+      font-size: var(--xl);
+      @include respond(md) {
+        font-size: 6.104rem;
+        letter-spacing: -2%;
+        line-height: 100%;
+      }
+    }
+  }
+}

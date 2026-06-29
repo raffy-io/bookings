@@ -1,0 +1,35 @@
+@use "../abstracts/mixins" as *;
+
+html {
+  box-sizing: border-box;
+  font-size: 56.25%; //1rem = 9px
+  scroll-behavior: smooth;
+
+  @include respond(md) {
+    font-size: 62.5%; //1rem = 10px
+  }
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+[x-cloak] {
+  display: none !important;
+}
+
+.datepicker {
+  transform: scale(1.5);
+  transform-origin: top left; // Keeps alignment clean when it drops down
+  z-index: 50;
+}
+
+/* After notie styles are applied to DOM: */
+.notie-container {
+  box-shadow: none;
+  z-index: 6000 !important;
+}

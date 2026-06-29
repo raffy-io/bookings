@@ -1,0 +1,47 @@
+package pages
+
+import (
+	"github.com/raffy-io/bookings/internal/forms"
+	"github.com/raffy-io/bookings/internal/models"
+)
+
+templ Availability(notif *models.NotifType, data *forms.AvailableForm, csrfToken string) {
+	<section class="py-8xl" x-data="{ shown: false }" x-intersect="shown = true">
+		<div class="container" x-data="datePickerComponent" x-cloak x-show="shown" x-transition.opacity.duration.1000ms>
+			<h2 class="capitalize mb-md">check available rooms</h2>
+			<form class="form__availability" action="/availability" method="post">
+				<input type="hidden" name="csrf_token" value={ csrfToken }/>
+				<div class="mb-sm form__availability-input" x-ref="pickerElement">
+					<div class="flex flex-col">
+						<label for="start_date"><h6 class="capitalize">arrival</h6></label>
+						<input
+							type="text"
+							id="start_date"
+							name="start_date"
+							value={ data.Arrival }
+							autocomplete="off"
+						/>
+						if notif != nil && notif.ErrorsMap["arrival"] != "" {
+							<p class="errors__text mt-xs">{ notif.ErrorsMap["arrival"] }</p>
+						}
+					</div>
+					<div class="flex flex-col">
+						<label for="end_date"><h6 class="capitalize">departure</h6></label>
+						<input
+							type="text"
+							id="end_date"
+							name="end_date"
+							value={ data.Departure }
+							autocomplete="off"
+						/>
+						if notif != nil && notif.ErrorsMap["departure"] != "" {
+							<p class="errors__text mt-xs">{ notif.ErrorsMap["departure"] }</p>
+						}
+					</div>
+				</div>
+				<hr/>
+				<button type="submit" class="btn btn-form py-xs px-lg mt-sm"><p class="capitalize">check available</p></button>
+			</form>
+		</div>
+	</section>
+}

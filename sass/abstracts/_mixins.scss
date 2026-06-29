@@ -1,0 +1,188 @@
+// 1. BUILT-IN SASS MODULES (Must be at the very top)
+@use "sass:map";
+@use "sass:meta";
+
+@mixin absCenter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+// MEDIA QUERY MANAGER (Mobile-First for Utility Scales)
+// sm: 600px+, md: 900px+, lg: 1200px+, xl: 1800px+
+@mixin respond($breakpoint) {
+  @if $breakpoint == sm {
+    @media only screen and (min-width: 37.5em) {
+      @content;
+    } // 600px
+  }
+  @if $breakpoint == md {
+    @media only screen and (min-width: 56.25em) {
+      @content;
+    } // 900px
+  }
+  @if $breakpoint == lg {
+    @media only screen and (min-width: 75em) {
+      @content;
+    } // 1200px
+  }
+  @if $breakpoint == xl {
+    @media only screen and (min-width: 112.5em) {
+      @content;
+    } // 1800px
+  }
+}
+
+// ==========================================
+// 2. CONFIGURATIONS & MAPS
+// ==========================================
+$spacing-map: (
+  "xs": var(--xs),
+  "sm": var(--sm),
+  "md": var(--md),
+  "lg": var(--lg),
+  "xl": var(--xl),
+  "2xl": var(--2xl),
+  "3xl": var(--3xl),
+  "4xl": var(--4xl),
+  "5xl": var(--5xl),
+  "6xl": var(--6xl),
+  "7xl": var(--7xl),
+  "8xl": var(--8xl),
+);
+
+$properties: (
+  "gap": (
+    property: gap,
+  ),
+  "text": (
+    property: font-size,
+  ),
+  "p": (
+    property: padding,
+  ),
+  "pt": (
+    property: padding-top,
+  ),
+  "pr": (
+    property: padding-right,
+  ),
+  "pb": (
+    property: padding-bottom,
+  ),
+  "pl": (
+    property: padding-left,
+  ),
+  "px": (
+    property: (
+      padding-left,
+      padding-right,
+    ),
+  ),
+  "py": (
+    property: (
+      padding-top,
+      padding-bottom,
+    ),
+  ),
+  "m": (
+    property: margin,
+  ),
+  "mt": (
+    property: margin-top,
+  ),
+  "mr": (
+    property: margin-right,
+  ),
+  "mb": (
+    property: margin-bottom,
+  ),
+  "ml": (
+    property: margin-left,
+  ),
+  "mx": (
+    property: (
+      margin-left,
+      margin-right,
+    ),
+  ),
+  "my": (
+    property: (
+      margin-top,
+      margin-bottom,
+    ),
+  ),
+);
+
+// Map the screen prefix to match the updated mobile-first respond mixin names
+$utility-breakpoints: ("sm", "md", "lg", "xl");
+
+// ==========================================
+// 3. MIXIN: Core Utility Generator
+// ==========================================
+@mixin generate-utilities($prefix: "") {
+  @each $className, $config in $properties {
+    $props: map.get($config, property);
+
+    @each $spaceName, $spaceValue in $spacing-map {
+      // Modern Sass approach to determine the selector string safely
+      $selector: "";
+      @if $prefix == "" {
+        $selector: ".#{$className}-#{$spaceName}";
+      } @else {
+        $selector: ".#{$prefix}\\:#{$className}-#{$spaceName}";
+      }
+
+      #{$selector} {
+        @if meta.type-of($props) == list {
+          @each $prop in $props {
+            #{$prop}: #{$spaceValue};
+          }
+        } @else {
+          #{$props}: #{$spaceValue};
+        }
+      }
+    }
+  }
+}
+
+// ==========================================
+// 4. EXECUTION
+// ==========================================
+
+// Generate base classes (e.g., .px-md, .mt-xl) - Applies everywhere by default
+@include generate-utilities();
+
+// Base auto-centering helpers
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+.my-auto {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+.m-auto {
+  margin: auto;
+}
+
+// Generate responsive classes scaling UP (e.g. mobile -> desktop)
+@each $bpName in $utility-breakpoints {
+  @include respond($bpName) {
+    @include generate-utilities($bpName);
+
+    // Responsive auto-centering helpers (e.g., .md:mx-auto)
+    .#{$bpName}\:mx-auto {
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .#{$bpName}\:my-auto {
+      margin-top: auto;
+      margin-bottom: auto;
+    }
+    .#{$bpName}\:m-auto {
+      margin: auto;
+    }
+  }
+}

@@ -1,0 +1,83 @@
+@use "../abstracts/mixins" as *;
+
+.form__availability {
+  &-input {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sm);
+
+    input {
+      border: none;
+      outline: none;
+      border-top: 2px solid transparent;
+      border-bottom: 2px solid transparent;
+      border-radius: 4px;
+      padding-left: var(--xs);
+      padding-top: var(--xs);
+      padding-bottom: var(--xs);
+
+      font-size: 1.6rem;
+      letter-spacing: normal;
+      line-height: 150%;
+
+      width: 100%;
+
+      @include respond(lg) {
+        width: 50%;
+      }
+
+      &:focus {
+        border-bottom: 2px solid var(--brand-10);
+      }
+    }
+  }
+}
+
+.form__reservation {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sm);
+  padding-left: var(--lg);
+  padding-right: var(--lg);
+  padding-top: var(--xl);
+  padding-bottom: var(--xl);
+  box-shadow: var(--shadow-sm);
+  background-color: #fff;
+  border-radius: 4px;
+  margin: 0 auto;
+
+  @include respond(md) {
+    width: 80%;
+  }
+
+  @include respond(lg) {
+    width: 70%;
+  }
+
+  &-group {
+    display: flex;
+    flex-direction: column;
+
+    input {
+      background-color: var(--brand-60);
+      border: none;
+      outline: none;
+      border-top: 2px solid transparent;
+      border-bottom: 2px solid transparent;
+      border-radius: 4px;
+      padding-left: var(--xs);
+      padding-top: var(--xs);
+      padding-bottom: var(--xs);
+
+      font-size: 1.6rem;
+      letter-spacing: normal;
+      line-height: 150%;
+
+      width: 100%;
+
+      &:focus {
+        border-bottom: 2px solid var(--brand-10);
+      }
+    }
+  }
+}

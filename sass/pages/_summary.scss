@@ -1,0 +1,20 @@
+@use "../abstracts/mixins" as *;
+
+.summary {
+  background-color: #fff;
+  box-shadow: var(--shadow-sm);
+  border-radius: 4px;
+
+  @include respond(lg) {
+    margin: 0 auto;
+    width: 60%;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 20fr 80fr;
+    align-items: center;
+    margin-bottom: var(--sm);
+    border-bottom: 1px solid var(--brand-30);
+  }
+}

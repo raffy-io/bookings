@@ -1,0 +1,41 @@
+package pages
+
+import "github.com/raffy-io/bookings/internal/models"
+
+templ BookingSummary(notif *models.NotifType, data *models.ReservationSummary) {
+	<section class="py-8xl">
+		<div class="container">
+			<div class="summary px-lg py-8xl">
+				<h2 class="mb-sm">Reservation Summary</h2>
+				<hr class="mb-lg"/>
+				<div class="summary__grid">
+					<h6>Name:</h6>
+					<p>{ data.Name }</p>
+				</div>
+				<div class="summary__grid">
+					<h6>Arrival:</h6>
+					<p>{ data.Arrival }</p>
+				</div>
+				<div class="summary__grid">
+					<h6>Departure:</h6>
+					<p>{ data.Departure } </p>
+				</div>
+				<div class="summary__grid">
+					<h6>Email:</h6>
+					<p>{ data.Email }</p>
+				</div>
+				<div class="summary__grid">
+					<h6>Phone:</h6>
+					<p>{ data.Phone }</p>
+				</div>
+			</div>
+		</div>
+		if notif != nil && notif.SuccessMessage != "" {
+			<div
+				x-data="notie"
+				data-type="success"
+				data-msg={ notif.SuccessMessage }
+			></div>
+		}
+	</section>
+}

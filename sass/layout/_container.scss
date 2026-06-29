@@ -1,0 +1,12 @@
+@use "../abstracts/mixins" as *;
+
+.container {
+  padding-left: var(--md);
+  padding-right: var(--md);
+  padding-top: var(--8xl);
+  padding-bottom: var(--8xl);
+
+  @include respond(md) {
+    padding: var(--8xl);
+  }
+}

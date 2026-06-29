@@ -1,0 +1,23 @@
+package pages
+
+templ Generals() {
+	<section class="py-8xl" x-data="{ shown: false }" x-intersect="shown = true">
+		<div class="container" x-cloak x-show="shown" x-transition.opacity.duration.1000ms>
+			<img class="img-fluid mb-lg" src="/static/images/generals.jpg" alt="generals quarters"/>
+			<h2 class="capitalize mb-xs">general's quarters</h2>
+			<p class="mb-sm">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam minima nobis neque optio, iure quas adipisci cupiditate illo temporibus dolore. Similique, quisquam veritatis nesciunt nisi doloribus eveniet ducimus eligendi dolor.</p>
+			<a href="/availability" class="btn btn-full py-xs px-lg"><p class="capitalize">check availability</p></a>
+		</div>
+	</section>
+}
+
+templ Majors() {
+	<section class="py-8xl" x-data="{ shown: false }" x-intersect="shown = true">
+		<div class="container" x-cloak x-show="shown" x-transition.opacity.duration.1000ms>
+			<img class="img-fluid mb-lg" src="/static/images/majors.jpg" alt="majors suite"/>
+			<h2 class="capitalize mb-xs">major's suite</h2>
+			<p class="mb-sm">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam minima nobis neque optio, iure quas adipisci cupiditate illo temporibus dolore. Similique, quisquam veritatis nesciunt nisi doloribus eveniet ducimus eligendi dolor.</p>
+			<a href="/availability" class="btn btn-full py-xs px-lg"><p class="capitalize">check availability</p></a>
+		</div>
+	</section>
+}

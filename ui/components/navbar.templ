@@ -1,0 +1,96 @@
+package components
+
+import "strings"
+
+templ Navbar(path string) {
+	<nav class="navbar p-md fixed-top z-5 flex space-between items-center" x-data="{open : false}">
+		<a href="/"><h5 class="capitalize">navbar</h5></a>
+		<ul class="navbar__list flex gap-sm text-sm capitalize">
+			<li class="navbar__list-item">
+				<a class={ templ.KV("active", path == "/") } href="/">home</a>
+			</li>
+			<li class="navbar__list-item">
+				<a class={ templ.KV("active", path == "/about") } href="/about">about</a>
+			</li>
+			<li class="relative flex items-center" x-data="{open : false}" @click.outside="open = false">
+				<button
+					class={ "capitalize dropdown-trigger text-sm", templ.KV("active", strings.HasPrefix(path, "/rooms")) }
+					@click="open = !open"
+				>
+					rooms
+				</button>
+				<ul
+					class="nav__dropdown mt-s"
+					x-cloak
+					x-show="open"
+					x-transition:enter.duration.300ms
+					x-transition:leave.duration.400ms
+				>
+					<li>
+						<a href="/rooms/generals">General's Quarter</a>
+					</li>
+					<li>
+						<a href="/rooms/majors">Major's Suite</a>
+					</li>
+				</ul>
+			</li>
+			<li class="navbar__list-item">
+				<a class={ templ.KV("active", path == "/availability") } href="/availability">availableRooms</a>
+			</li>
+			<li class="navbar__list-item">
+				<a class={ templ.KV("active", path == "/contacts") } href="/contacts">contacts</a>
+			</li>
+		</ul>
+	</nav>
+}
+
+templ MobileNavbar(path string) {
+	<nav class="mobile-navbar p-md fixed-top z-5" x-data="{open : false}" @click.outside="open = false">
+		<div class="flex space-between items-center">
+			<a href="/"><h5 class="capitalize">navbar</h5></a>
+			<button class="btn btn-nav flex flex-center" @click="open = !open"><ion-icon name="menu-outline"></ion-icon></button>
+		</div>
+		<ul
+			class="navbar__list flex flex-col gap-sm text-sm capitalize mt-lg"
+			x-cloak
+			x-show="open"
+			x-transition:enter.duration.300ms
+			x-transition:leave.duration.400ms
+		>
+			<li class="navbar__list-item">
+				<a class={ templ.KV("active", path == "/") } href="/">home</a>
+			</li>
+			<li class="navbar__list-item">
+				<a class={ templ.KV("active", path == "/about") } href="/about">about</a>
+			</li>
+			<li class="relative flex items-center" x-data="{open : false}" @click.outside="open = false">
+				<button
+					class={ "capitalize dropdown-trigger text-sm", templ.KV("active", strings.HasPrefix(path, "/rooms")) }
+					@click="open = !open"
+				>
+					rooms
+				</button>
+				<ul
+					class="mobile-nav__dropdown mt-s"
+					x-cloak
+					x-show="open"
+					x-transition:enter.duration.300ms
+					x-transition:leave.duration.400ms
+				>
+					<li>
+						<a href="/rooms/generals">General's Quarter</a>
+					</li>
+					<li>
+						<a href="/rooms/majors">Major's Suite</a>
+					</li>
+				</ul>
+			</li>
+			<li class="navbar__list-item">
+				<a class={ templ.KV("active", path == "/availability") } href="/availability">availableRooms</a>
+			</li>
+			<li class="navbar__list-item">
+				<a class={ templ.KV("active", path == "/contacts") } href="/contacts">contacts</a>
+			</li>
+		</ul>
+	</nav>
+}

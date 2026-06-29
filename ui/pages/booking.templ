@@ -1,0 +1,45 @@
+package pages
+
+import "github.com/raffy-io/bookings/internal/models"
+import "github.com/raffy-io/bookings/internal/forms"
+
+templ Booking(notif *models.NotifType, data *forms.BookingForm, csrfToken string) {
+	<section class="py-8xl" x-data="{ shown: false }" x-intersect="shown = true">
+		<div class="container" x-cloak x-show="shown" x-transition.opacity.duration.1000ms>
+			<form action="/booking" method="post" class="form__reservation">
+				<input type="hidden" name="csrf_token" value={ csrfToken }/>
+				<h2>Make Reservation</h2>
+				<div class="form__reservation-group">
+					<label for="first_name"><h6>First Name:</h6></label>
+					<input type="text" id="first_name" name="first_name" value={ data.FirstName } autocomplete="off"/>
+					if notif != nil && notif.ErrorsMap["first_name"] != "" {
+						<p class="errors__text">{ notif.ErrorsMap["first_name"] }</p>
+					}
+				</div>
+				<div class="form__reservation-group">
+					<label for="last_name"><h6>Last Name:</h6></label>
+					<input type="text" id="last_name" name="last_name" value={ data.LastName } autocomplete="off"/>
+					if notif != nil && notif.ErrorsMap["last_name"] != "" {
+						<p class="errors__text">{ notif.ErrorsMap["last_name"] }</p>
+					}
+				</div>
+				<div class="form__reservation-group">
+					<label for="email"><h6>Email:</h6></label>
+					<input type="email" id="email" name="email" value={ data.Email } autocomplete="off"/>
+					if notif != nil && notif.ErrorsMap["email"] != "" {
+						<p class="errors__text">{ notif.ErrorsMap["email"] }</p>
+					}
+				</div>
+				<div class="form__reservation-group">
+					<label for="phone"><h6>Phone:</h6></label>
+					<input type="text" id="phone" name="phone" value={ data.Phone } autocomplete="off"/>
+					if notif != nil && notif.ErrorsMap["phone"] != "" {
+						<p class="errors__text">{ notif.ErrorsMap["phone"] }</p>
+					}
+				</div>
+				<hr/>
+				<button type="submit" class="btn btn-form py-xs px-lg "><p class="capitalize">make reservation</p></button>
+			</form>
+		</div>
+	</section>
+}
