@@ -13,10 +13,10 @@ type Reservation struct {
 	FirstName string
 	LastName  string
 	Email     string
-	Phone     pgtype.Text
+	Phone     string
 	StartDate pgtype.Date
 	EndDate   pgtype.Date
-	RoomID    int32
+	RoomID    int64
 	CreatedAt pgtype.Timestamptz
 	UpdatedAt pgtype.Timestamptz
 }
@@ -39,9 +39,9 @@ type RoomRestriction struct {
 	ID            int64
 	StartDate     pgtype.Date
 	EndDate       pgtype.Date
-	RoomID        int32
-	ReservationID int32
-	RestrictionID int32
+	RoomID        int64
+	ReservationID int64
+	RestrictionID int64
 	CreatedAt     pgtype.Timestamptz
 	UpdatedAt     pgtype.Timestamptz
 }

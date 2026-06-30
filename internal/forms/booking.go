@@ -43,9 +43,7 @@ func ValidateReservation(form *BookingForm) (FormErrors, bool) {
 	}
 
 	// Phone Validation
-	if form.Phone == "" {
-		errors["phone"] = "Phone number is required"
-	} else if !phoneRegex.MatchString(form.Phone) {
+	if form.Phone != "" && !phoneRegex.MatchString(form.Phone) {
 		errors["phone"] = "Please enter a valid phone number (numbers, spaces, or dashes only)"
 	}
 

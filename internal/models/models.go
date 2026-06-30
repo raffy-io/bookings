@@ -8,10 +8,3 @@ type NotifType struct {
 	ErrorsMap  forms.FormErrors
 }
 
-type ReservationSummary struct {
-	Name string
-	Arrival string
-	Departure string
-	Email string
-	Phone string
-}

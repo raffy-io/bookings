@@ -3,9 +3,9 @@ CREATE TABLE room_restrictions (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     start_date date NOT NULL,
     end_date date NOT NULL,
-    room_id int NOT NULL,
-    reservation_id int NOT NULL,
-    restriction_id int NOT NULL,
+    room_id BIGINT NOT NULL,
+    reservation_id BIGINT NOT NULL,
+    restriction_id BIGINT NOT NULL,
     created_at timestamptz NOT NULL DEFAULT NOW(),
     updated_at timestamptz NOT NULL DEFAULT NOW(),
 

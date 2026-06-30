@@ -24,10 +24,10 @@ type CreateReservationParams struct {
 	FirstName string
 	LastName  string
 	Email     string
-	Phone     pgtype.Text
+	Phone     string
 	StartDate pgtype.Date
 	EndDate   pgtype.Date
-	RoomID    int32
+	RoomID    int64
 }
 
 func (q *Queries) CreateReservation(ctx context.Context, arg CreateReservationParams) (Reservation, error) {

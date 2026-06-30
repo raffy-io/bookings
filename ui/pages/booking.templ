@@ -41,5 +41,12 @@ templ Booking(notif *models.NotifType, data *forms.BookingForm, csrfToken string
 				<button type="submit" class="btn btn-form py-xs px-lg "><p class="capitalize">make reservation</p></button>
 			</form>
 		</div>
+		if notif != nil && notif.ErrorMessage != "" {
+			<div
+				x-data="notie"
+				data-type="error"
+				data-msg={ notif.ErrorMessage }
+			></div>
+		}
 	</section>
 }

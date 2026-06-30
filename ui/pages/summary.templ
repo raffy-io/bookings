@@ -1,8 +1,15 @@
 package pages
 
 import "github.com/raffy-io/bookings/internal/models"
+import "github.com/raffy-io/bookings/internal/db"
+import "github.com/jackc/pgx/v5/pgtype"
 
-templ BookingSummary(notif *models.NotifType, data *models.ReservationSummary) {
+// Helper functions for explicit formatting
+func formatDate(d pgtype.Date) string {
+	return d.Time.Format("2006-01-02")
+}
+
+templ BookingSummary(notif *models.NotifType, data *db.Reservation) {
 	<section class="py-8xl">
 		<div class="container">
 			<div class="summary px-lg py-8xl">
@@ -10,15 +17,15 @@ templ BookingSummary(notif *models.NotifType, data *models.ReservationSummary) {
 				<hr class="mb-lg"/>
 				<div class="summary__grid">
 					<h6>Name:</h6>
-					<p>{ data.Name }</p>
+					<p><span>{ data.FirstName }</span><span>{ data.LastName }</span></p>
 				</div>
 				<div class="summary__grid">
 					<h6>Arrival:</h6>
-					<p>{ data.Arrival }</p>
+					<p>{ formatDate(data.StartDate) }</p>
 				</div>
 				<div class="summary__grid">
 					<h6>Departure:</h6>
-					<p>{ data.Departure } </p>
+					<p>{ formatDate(data.EndDate) }</p>
 				</div>
 				<div class="summary__grid">
 					<h6>Email:</h6>

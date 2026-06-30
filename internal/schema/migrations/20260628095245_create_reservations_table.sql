@@ -4,10 +4,10 @@ CREATE TABLE reservations (
     first_name text NOT NULL,
     last_name text NOT NULL,
     email text NOT NULL,
-    phone text  NULL,
+    phone text  NOT NULL DEFAULT '',
     start_date date NOT  NULL,
     end_date date NOT  NULL,
-    room_id int NOT NULL,
+    room_id BIGINT NOT NULL,
     created_at timestamptz NOT NULL DEFAULT NOW(),
     updated_at timestamptz NOT NULL DEFAULT NOW(),
 

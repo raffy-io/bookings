@@ -23,9 +23,9 @@ RETURNING id, start_date, end_date, room_id, reservation_id, restriction_id, cre
 type CreateRoomRestrictionParams struct {
 	StartDate     pgtype.Date
 	EndDate       pgtype.Date
-	RoomID        int32
-	ReservationID int32
-	RestrictionID int32
+	RoomID        int64
+	ReservationID int64
+	RestrictionID int64
 }
 
 func (q *Queries) CreateRoomRestriction(ctx context.Context, arg CreateRoomRestrictionParams) (RoomRestriction, error) {

@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"fmt"
+	"log/slog"
 	"net/http"
 	"strings"
 
@@ -17,11 +18,13 @@ import (
 
 type Handlers struct {
 	Session *scs.SessionManager
+	Queries *db.Queries
 }
 
 func New(session *scs.SessionManager,queries *db.Queries) *Handlers {
 	return &Handlers{
 		Session: session,
+		Queries:queries,
 	}
 }
 
@@ -102,7 +105,9 @@ func (h *Handlers) PostAvailability(w http.ResponseWriter, r *http.Request) {
 
 func (h *Handlers) Booking(w http.ResponseWriter, r *http.Request) {
 	path := r.URL.Path
-	notif := &models.NotifType{}
+	notif := &models.NotifType{
+		ErrorMessage: h.Session.PopString(r.Context(), "error"),
+	}
 	form := &forms.BookingForm{}
 	token := nosurf.Token(r)
 
@@ -138,15 +143,22 @@ func (h *Handlers) PostBooking(w http.ResponseWriter, r *http.Request){
 		layout := layout.Base(path,"Make Booking", component)
 		w.WriteHeader(http.StatusUnprocessableEntity) // 422 status code
 		templ.Handler(layout).ServeHTTP(w, r)
-
 		return
 	}
 
-	// fictional DB save logic
-	data := &models.ReservationSummary{
-		Name:  fmt.Sprintf("%s %s", form.FirstName, form.LastName),
+	data, err := h.Queries.CreateReservation(r.Context(),db.CreateReservationParams{
+		FirstName: form.FirstName,
+		LastName: form.LastName,
 		Email: form.Email,
 		Phone: form.Phone,
+	})
+
+	if err != nil {
+		h.Session.Put(r.Context(), "error", "Failed to book reservation..please try again.")
+		// The Professional Go Way (Structured Logging)
+    	slog.Error("failed to create reservation in database", "error", err)
+		http.Redirect(w,r,"/booking",http.StatusSeeOther)
+		return 
 	}
 
 	// Notif data on redirect
@@ -163,7 +175,7 @@ func (h *Handlers) BookingSummary(w http.ResponseWriter, r *http.Request) {
 	notif := &models.NotifType{
 		SuccessMessage: h.Session.PopString(r.Context(), "flash"),
 	}
-	reservation, ok := h.Session.Get(r.Context(), "reservation").(models.ReservationSummary)
+	reservation, ok := h.Session.Get(r.Context(), "reservation").(*db.Reservation)
 	if !ok {
 		h.Session.Put(r.Context(), "error", "Can't get reservation from the session")
 		fmt.Println("you will be redirected")
@@ -172,7 +184,7 @@ func (h *Handlers) BookingSummary(w http.ResponseWriter, r *http.Request) {
 	}
 	
 	h.Session.Remove(r.Context(),"reservation")
-	component := pages.BookingSummary(notif, &reservation)
+	component := pages.BookingSummary(notif, reservation)
 	layout := layout.Base(path,"Reservation Summary", component)
 	templ.Handler(layout).ServeHTTP(w, r)
 }
